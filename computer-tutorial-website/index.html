@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechLearn Pro - Computer Tutorials & Education</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <span class="logo-icon">💻</span>
+                <span class="logo-text">TechLearn Pro</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#tutorials" class="nav-link">Tutorials</a></li>
+                <li><a href="#dashboard" class="nav-link">Dashboard</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <button class="hamburger" id="hamburger">☰</button>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <h1>Master Computer Science & Technology</h1>
+            <p>Learn from comprehensive tutorials with interactive 3D visualizations and professional guidance</p>
+            <div class="hero-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('tutorials').scrollIntoView({behavior: 'smooth'})">Start Learning</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">Get in Touch</button>
+            </div>
+        </div>
+        <div id="3d-hero" class="hero-3d"></div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <h2>Find Your Tutorial</h2>
+            <div class="search-bar">
+                <input type="text" id="searchInput" class="search-input" placeholder="Search tutorials by topic...">
+                <button class="search-btn" onclick="searchTutorials()">🔍 Search</button>
+            </div>
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </section>
+
+    <!-- Tutorials Catalog -->
+    <section id="tutorials" class="tutorials">
+        <div class="container">
+            <h2>Tutorial Categories</h2>
+            <div class="tutorial-grid" id="tutorialGrid">
+                <!-- Tutorials will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured 3D Section -->
+    <section class="featured-3d">
+        <div class="container">
+            <h2>Interactive 3D Learning</h2>
+            <div class="three-d-container">
+                <div id="3d-canvas" class="three-d-canvas"></div>
+                <div class="three-d-info">
+                    <h3>Explore Computer Architecture</h3>
+                    <p>Interact with 3D models to understand computer components, data flow, and system architecture.</p>
+                    <button class="btn btn-primary" onclick="rotateModel()">Rotate Model</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="newsletter">
+        <div class="container">
+            <h2>Stay Updated with Latest Tutorials</h2>
+            <p>Subscribe to our newsletter and get notified about new courses and tutorials</p>
+            <form class="newsletter-form" onsubmit="subscribeNewsletter(event)">
+                <input type="email" id="emailInput" placeholder="Enter your email" required>
+                <button type="submit" class="btn btn-primary">Subscribe</button>
+            </form>
+            <div id="newsletterMessage" class="message"></div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2>Your Learning Dashboard</h2>
+            <div class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h3>📚 Courses Enrolled</h3>
+                    <p class="stat-number" id="enrolledCount">0</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>✅ Completed</h3>
+                    <p class="stat-number" id="completedCount">0</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>⏱️ Hours Learned</h3>
+                    <p class="stat-number" id="hoursLearned">0</p>
+                </div>
+                <div class="dashboard-card">
+                    <h3>🏆 Achievements</h3>
+                    <p class="stat-number" id="achievements">0</p>
+                </div>
+            </div>
+            <button class="btn btn-primary" onclick="downloadCertificate()">Download Certificate</button>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2>About TechLearn Pro</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>TechLearn Pro is a comprehensive online learning platform dedicated to teaching computer science, programming, web development, and technology fundamentals.</p>
+                    <p>Our mission is to make quality technical education accessible to everyone through interactive tutorials, 3D visualizations, and expert guidance.</p>
+                    <h3>What We Offer:</h3>
+                    <ul class="features-list">
+                        <li>✓ Comprehensive tutorials on all major topics</li>
+                        <li>✓ Interactive 3D visualizations</li>
+                        <li>✓ Real-world project assignments</li>
+                        <li>✓ Certificates of completion</li>
+                        <li>✓ Community support and mentoring</li>
+                    </ul>
+                </div>
+                <div class="about-image">
+                    <div id="3d-about" class="three-d-canvas"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <form class="contact-form" onsubmit="submitContact(event)">
+                <div class="form-group">
+                    <label for="name">Full Name</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="contactEmail">Email Address</label>
+                    <input type="email" id="contactEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="subject">Subject</label>
+                    <input type="text" id="subject" name="subject" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" rows="5" required></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary">Send Message</button>
+            </form>
+            <div id="contactMessage" class="message"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>TechLearn Pro</h3>
+                    <p>Empowering the next generation of tech professionals</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#tutorials">Tutorials</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p>Email: info@techlearnpro.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 TechLearn Pro. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
